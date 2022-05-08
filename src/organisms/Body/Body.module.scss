@@ -1,0 +1,9 @@
+.body {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 20px;
+  .gridItems {
+    padding: 10px;
+  }
+}
