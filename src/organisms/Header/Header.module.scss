@@ -1,0 +1,14 @@
+.Banner {
+  height: 448px;
+  color: white;
+  padding-left: 10px;
+  .Title {
+    font-size: 30px;
+    padding-top: 200px;
+  }
+  .OverView {
+    word-wrap: break-word;
+    width: 50%;
+    height: 100px;
+  }
+}
