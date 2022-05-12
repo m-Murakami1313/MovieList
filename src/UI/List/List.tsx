@@ -2,28 +2,26 @@ import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
 
 import styles from "./List.module.scss";
+import { useHandlePageNumber } from "../../hooks/UseHandlePageNumber";
 
-export const List = ({
-  title,
-  fetchUrl,
-  handleNextPage,
-  pageNumber,
-  handlePreventPage,
-}: any) => {
+export const List = ({ title, fetchUrl }: any) => {
   const [movies, setMovies] = useState([]);
 
+  const { pageNumber, handleNextPage, handlePreventPage } =
+    useHandlePageNumber();
+
   const base_url = "https://api.themoviedb.org/3";
-  const url = base_url + fetchUrl;
+  const url = base_url + fetchUrl + `&page=${pageNumber}`;
+  console.log(url);
 
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setMovies(data.results);
       })
       .catch((error) => console.log("映画情報の取得に失敗しました"));
-  }, [fetchUrl]);
+  }, [pageNumber]);
 
   return (
     <div className={styles.body}>
