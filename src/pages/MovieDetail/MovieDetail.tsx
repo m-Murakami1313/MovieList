@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Box } from "@mui/system";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 import styles from "./MovieDetail.module.scss";
 
-export const MovieDetail = () => {
+type movieProps = {
+  title?: string;
+  backdrop_path?: string;
+  overview?: string;
+  id?: number;
+  release_date?: string;
+  vote_average?: number;
+};
+
+export const MovieDetail = memo(() => {
   const location = useLocation();
-  const [result, setResult] = useState(location.state as { movie: any });
+  const [result, setResult] = useState(location.state as { movie: movieProps });
 
   return (
     <div className={styles.container}>
@@ -15,7 +25,7 @@ export const MovieDetail = () => {
         style={{
           backgroundPosition: "center",
           backgroundSize: "cover",
-          backgroundImage: `url("https://image.tmdb.org/t/p/original${result.movie?.backdrop_path}")`,
+          backgroundImage: `url("https://image.tmdb.org/t/p/original${result.movie.backdrop_path}")`,
         }}
       >
         <h1 className={styles.title}>{result.movie.title} </h1>
@@ -24,7 +34,10 @@ export const MovieDetail = () => {
           vote_average {result.movie.vote_average}
         </p>
         <p className={styles.overview}>{result.movie.overview}</p>
+        <Button className={styles.button}>
+          <Link to="/">戻る</Link>
+        </Button>
       </Box>
     </div>
   );
-};
+});
