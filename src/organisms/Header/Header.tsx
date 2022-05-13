@@ -1,4 +1,5 @@
 import { useState, useEffect, memo } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Header.module.scss";
 
@@ -8,10 +9,12 @@ type movieProps = {
   original_title?: string;
   backdrop_path?: string;
   overview: string;
+  id?: number;
 };
 
 export const Header = () => {
   const [headerMovie, setHeaderMovie] = useState<movieProps>({ overview: "" });
+  const navigate = useNavigate();
 
   const APIKEY = "?api_key=" + process.env.React_APP_MOVIE_API_KEY;
   const base_url = "https://api.themoviedb.org/3";
@@ -26,6 +29,7 @@ export const Header = () => {
         setHeaderMovie(
           data.results[Math.floor(Math.random() * data.results.length - 1)]
         );
+        console.log(data.results);
       } catch (err) {
         console.error("ヘッダーの映画情報の取得に失敗しました");
       }
@@ -34,7 +38,13 @@ export const Header = () => {
   }, []);
 
   return (
-    <div>
+    <div
+      onClick={() =>
+        navigate(`/movie/${headerMovie.id}`, {
+          state: { headerMovie: headerMovie },
+        })
+      }
+    >
       {headerMovie && (
         <header
           className={styles.Banner}
