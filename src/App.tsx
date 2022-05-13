@@ -1,5 +1,3 @@
-import React from "react";
-import { Top } from "../src/pages/Top/Top";
 import { Router } from "./router/Router";
 
 function App() {

@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 export const useHandlePageNumber = () => {
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState<number>(1);
 
   const handleNextPage: () => void = () => {
     setPageNumber(pageNumber + 1);

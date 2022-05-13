@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, FC } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./Header.module.scss";
@@ -8,12 +8,12 @@ type movieProps = {
   name?: string;
   original_title?: string;
   backdrop_path?: string;
-  overview: string;
+  overview?: string;
   id?: number;
 };
 
-export const Header = () => {
-  const [headerMovie, setHeaderMovie] = useState<movieProps>({ overview: "" });
+export const Header: FC = memo(() => {
+  const [headerMovie, setHeaderMovie] = useState<movieProps>({});
   const navigate = useNavigate();
 
   const APIKEY = "?api_key=" + process.env.React_APP_MOVIE_API_KEY;
@@ -45,23 +45,23 @@ export const Header = () => {
         })
       }
     >
-      {headerMovie && (
+      {headerMovie.backdrop_path && (
         <header
           className={styles.Banner}
           style={{
             backgroundPosition: "center center",
             backgroundSize: "cover",
-            backgroundImage: `url("https://image.tmdb.org/t/p/original${headerMovie?.backdrop_path}")`,
+            backgroundImage: `url("https://image.tmdb.org/t/p/original${headerMovie.backdrop_path}")`,
           }}
         >
           <p className={styles.Title}>{headerMovie.original_title}</p>
-          {
+          {headerMovie.overview && (
             <p className={styles.OverView}>
               {headerMovie.overview.substring(0, 150) + "..."}
             </p>
-          }
+          )}
         </header>
       )}
     </div>
   );
-};
+});

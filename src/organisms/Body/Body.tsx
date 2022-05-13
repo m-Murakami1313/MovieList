@@ -1,7 +1,8 @@
+import { memo, FC } from "react";
 import { List } from "../../UI/List/List";
 import { requests } from "../RequestsUrl/RequestsUrl";
 
-export const Body = () => {
+export const Body: FC = memo(() => {
   return (
     <div>
       <List title="TopRated" fetchUrl={requests.feachTopRated} />
@@ -11,4 +12,4 @@ export const Body = () => {
       <List title="Fantasy" fetchUrl={requests.feachFantasy} />
     </div>
   );
-};
+});

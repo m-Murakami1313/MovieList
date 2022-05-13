@@ -1,12 +1,25 @@
 import { Button } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo, FC } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./List.module.scss";
 import { useHandlePageNumber } from "../../hooks/UseHandlePageNumber";
 
-export const List = ({ title, fetchUrl }: any) => {
-  const [movies, setMovies] = useState([]);
+type propsTypes = {
+  title: string;
+  fetchUrl: string;
+};
+type movieProps = {
+  title?: string;
+  original_title?: string;
+  backdrop_path?: string;
+  overview?: string;
+  id?: number;
+  poster_path?: string;
+};
+
+export const List: FC<propsTypes> = memo(({ title, fetchUrl }) => {
+  const [movies, setMovies] = useState<movieProps[]>([]);
 
   const { pageNumber, handleNextPage, handlePreventPage } =
     useHandlePageNumber();
@@ -35,7 +48,7 @@ export const List = ({ title, fetchUrl }: any) => {
       <div className={styles.list}>
         {pageNumber >= 2 && <Button onClick={handlePreventPage}>戻る</Button>}
         {movies &&
-          movies.map((movie: any) => (
+          movies.map((movie: movieProps) => (
             <div
               key={movie.id}
               className={styles.gridItems}
@@ -55,4 +68,4 @@ export const List = ({ title, fetchUrl }: any) => {
       </div>
     </div>
   );
-};
+});
