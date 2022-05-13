@@ -15,12 +15,16 @@ export const List = ({ title, fetchUrl }: any) => {
   console.log(url);
 
   useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
         setMovies(data.results);
-      })
-      .catch((error) => console.log("映画情報の取得に失敗しました"));
+      } catch (error) {
+        console.log("映画情報の取得に失敗しました");
+      }
+    };
+    fetchData();
   }, [pageNumber]);
 
   return (
