@@ -41,7 +41,7 @@ export const Header = () => {
     <div
       onClick={() =>
         navigate(`/movie/${headerMovie.id}`, {
-          state: { headerMovie: headerMovie },
+          state: { movie: headerMovie },
         })
       }
     >
