@@ -29,7 +29,6 @@ export const Header: FC = memo(() => {
         setHeaderMovie(
           data.results[Math.floor(Math.random() * data.results.length - 1)]
         );
-        console.log(data.results);
       } catch (err) {
         console.error("ヘッダーの映画情報の取得に失敗しました");
       }
