@@ -7,11 +7,11 @@ type movieProps = {
   name?: string;
   original_title?: string;
   backdrop_path?: string;
-  overview?: string;
+  overview: string;
 };
 
 export const Header = () => {
-  const [headerMovie, setHeaderMovie] = useState<movieProps>({});
+  const [headerMovie, setHeaderMovie] = useState<movieProps>({ overview: "" });
 
   const APIKEY = "?api_key=" + process.env.React_APP_MOVIE_API_KEY;
   const base_url = "https://api.themoviedb.org/3";
@@ -33,7 +33,6 @@ export const Header = () => {
     fetchData();
   }, []);
 
-
   return (
     <div>
       {headerMovie && (
@@ -46,7 +45,11 @@ export const Header = () => {
           }}
         >
           <p className={styles.Title}>{headerMovie.original_title}</p>
-          <p className={styles.OverView}>{headerMovie.overview}</p>
+          {
+            <p className={styles.OverView}>
+              {headerMovie.overview.substring(0, 150) + "..."}
+            </p>
+          }
         </header>
       )}
     </div>
