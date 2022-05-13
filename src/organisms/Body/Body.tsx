@@ -1,4 +1,3 @@
-import styles from "./Body.module.scss";
 import { List } from "../../UI/List/List";
 import { requests } from "../RequestsUrl/RequestsUrl";
 

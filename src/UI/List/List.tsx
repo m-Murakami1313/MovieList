@@ -12,7 +12,6 @@ export const List = ({ title, fetchUrl }: any) => {
 
   const base_url = "https://api.themoviedb.org/3";
   const url = base_url + fetchUrl + `&page=${pageNumber}`;
-  console.log(url);
 
   useEffect(() => {
     const fetchData = async () => {
