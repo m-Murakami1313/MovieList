@@ -1,5 +1,6 @@
-import { useState, useEffect, memo, FC } from "react";
+import { memo,  useState,useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAPIData } from "../../hooks/UseAPIData";
 
 import styles from "./Header.module.scss";
 
@@ -12,28 +13,21 @@ type movieProps = {
   id?: number;
 };
 
-export const Header: FC = memo(() => {
+export const Header = memo(() => {
   const [headerMovie, setHeaderMovie] = useState<movieProps>({});
+  const { fetchData } = useAPIData();
   const navigate = useNavigate();
 
-  const APIKEY = "?api_key=" + process.env.React_APP_MOVIE_API_KEY;
-  const base_url = "https://api.themoviedb.org/3";
-  const freeWord = "/movie/now_playing";
-  const url = base_url + freeWord + APIKEY;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setHeaderMovie(
-          data.results[Math.floor(Math.random() * data.results.length - 1)]
-        );
-      } catch (err) {
-        console.error("ヘッダーの映画情報の取得に失敗しました");
-      }
+  useMemo(() => {
+    const fetchAPI = async () => {
+      const firstFetch = await fetchData();
+      setHeaderMovie(
+        firstFetch.results[
+          Math.floor(Math.random() * firstFetch.results.length)
+        ]
+      );
     };
-    fetchData();
+    fetchAPI();
   }, []);
 
   return (
