@@ -1,4 +1,4 @@
-import { memo,  useState,useMemo } from "react";
+import { memo, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAPIData } from "../../hooks/UseAPIData";
 
@@ -21,11 +21,14 @@ export const Header = memo(() => {
   useMemo(() => {
     const fetchAPI = async () => {
       const firstFetch = await fetchData();
-      setHeaderMovie(
-        firstFetch.results[
-          Math.floor(Math.random() * firstFetch.results.length)
-        ]
-      );
+      {
+        firstFetch &&
+          setHeaderMovie(
+            firstFetch.results[
+              Math.floor(Math.random() * firstFetch.results.length)
+            ]
+          );
+      }
     };
     fetchAPI();
   }, []);
