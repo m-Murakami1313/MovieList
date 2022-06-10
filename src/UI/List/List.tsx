@@ -53,7 +53,7 @@ export const List: FC<propsTypes> = memo(({ title, fetchUrl }) => {
               key={movie.id}
               className={styles.gridItems}
               onClick={() =>
-                navigate(`/movie/${movie.id}`, {
+                navigate(`/MovieList/movie/${movie.id}`, {
                   state: { movie: movie },
                 })
               }

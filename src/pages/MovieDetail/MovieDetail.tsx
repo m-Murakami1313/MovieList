@@ -35,7 +35,7 @@ export const MovieDetail = memo(() => {
         </p>
         <p className={styles.overview}>{result.movie.overview}</p>
         <Button className={styles.button}>
-          <Link to="/">戻る</Link>
+          <Link to="/MovieList/">戻る</Link>
         </Button>
       </Box>
     </div>

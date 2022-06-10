@@ -36,7 +36,7 @@ export const Header = memo(() => {
   return (
     <div
       onClick={() =>
-        navigate(`/movie/${headerMovie.id}`, {
+        navigate(`/MovieList/movie/${headerMovie.id}`, {
           state: { movie: headerMovie },
         })
       }
