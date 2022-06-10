@@ -1,6 +1,7 @@
 .container {
   color: white;
   .box {
+    overflow: hidden;
     width: 100%;
     height: 800px;
     .title {
