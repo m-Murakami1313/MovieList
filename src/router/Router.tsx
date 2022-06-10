@@ -6,8 +6,8 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Top />} />
-        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/MovieList/" element={<Top />} />
+        <Route path="/MovieList/movie/:id" element={<MovieDetail />} />
       </Routes>
     </BrowserRouter>
   );
